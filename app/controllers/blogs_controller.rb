@@ -1,17 +1,16 @@
 class BlogsController < ApplicationController
 
   def index
-    @blogs = Blogs.all
-    render :index
+    @blogs = Blog.all
   end
 
   def new
-    render :new
+    @blog = Blog.new
   end
 
   def create
     @blog = Blog.create!(blog_params)
-    redirect_to "/blogs/#{@blog.id}"
+    redirect_to blog_path(@blog)
   end
 
   def show
@@ -25,13 +24,13 @@ class BlogsController < ApplicationController
   def update
     @blog = Artist.find(params[:id])
     @blog.update(blog_params)
-    redirect_to "/blogs/#{@blog.id}"
+    redirect_to blog_path(@blog)
   end
 
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy
-    redirect_to "/blogs"
+    redirect_to blogs_path
   end
 
   private
